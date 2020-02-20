@@ -2,9 +2,15 @@
     <head>
         <title>Panget ni Brent mag name ng folders</title>
         <link rel="stylesheet" href="http://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
         <script src="http://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="leaflet.ajax.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+         crossorigin=""></script>
         
     </head>
     <body>
@@ -12,11 +18,18 @@
         <script type="text/javascript">
 
         var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
-        var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson"]
-        
+        var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson"];
         var i;
+        var locations = [
+                        ["Location_1", 11.229777487731775,124.98920222963409],
+                        ["Location_2", 11.228178309138892,124.98806834296578],
+                        ["Location_3", 11.230538777360755,124.98808450599243],
+                        ["Location_4", 11.228607782759536,124.98901103318568],
+                        ["Location_5", 11.226998074879432,124.98806026280866],
+                        ];
+
         var barangays = $.ajax({
-          url: url_str.concat(kml_docs[1]),
+          url: url_str.concat(kml_docs[0]),
           dataType: "json",
           success: console.log("Barangay data successfully loaded."),
           error: function (xhr) {
@@ -44,6 +57,14 @@
             }).addTo(map);
             
             var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
+            
+            var marker = L.marker([124.98920222963409,11.229777487731775]).addTo(map);
+
+            for (var i = 0; i < locations.length; i++) {
+			    marker = new L.marker([locations[i][1],locations[i][2]])
+				.bindPopup(locations[i][0])
+				.addTo(map);
+	    	}
     
         });
 
