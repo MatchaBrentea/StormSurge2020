@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATICFILES_DIRS = ["/StormSurge/stormsurged/static"]
 
 # Application definition
 

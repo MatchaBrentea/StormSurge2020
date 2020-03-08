@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Panget ni Brent mag Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <link href="../css/leaflet.css" rel="stylesheet">
+    <script src="http://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="jquery-csv.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" type ="text/css" href="{% static 'css/ol3-sidebar.css' %}" />
+
+    <style>
+
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        html, body, #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+                <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="https://github.com/MatchaBrentea/StormSurge2020" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    sidebar-v2
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+
+            <div class="sidebar-pane" id="profile">
+                <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="messages">
+                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" class="sidebar-map"></div>
+    
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+    <script src="{% static 'js/ol3-sidebar.js' %}"></script>
+
+    <script>
+          var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
+            var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson"];
+            var i;
+            var loc=[];
+            var notif_arr=[];
+
+            var bar = $(document).ready(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
+                    dataType: "text",
+                    success: function(data) {processData(data);}
+                });
+            });
+
+            function processData(allText) {
+                var allTextLines = allText.split(/\r\n|\n/);
+                var headers = allTextLines[0].split(',');
+                var lines=[];
+
+                for (var i=1; i<allTextLines.length; i++) {
+                    var data = allTextLines[i].split(',');
+                    if (data.length == headers.length) {
+
+                        var tarr = [];
+                        for (var j=0; j<headers.length; j++) {
+                            tarr.push(headers[j]+":"+data[j]);
+                        }
+                        lines.push(tarr);
+                    }
+                }
+                
+                for (var i=0; i<=lines.length;i++){
+                    var to_input = "<h1>STORM SURGE WARNING</h1>"
+                    + "<p style = 'color:red';''font-weight='bold'>"+(lines[i][0].substring(5,lines[i][0].length))
+                    + ", Tacloban City, 6500 Leyte, Philippines</p>"
+                    + "Expect a surge as early as "
+                    + ((parseFloat((lines[i][4].substring(4,lines[i][4].length))))/60).toString()
+                    + " hours from now which can reach max height of "
+                    + (lines[i][3].substring(6,lines[i][3].length))
+                    + " meter(s) at "
+                    + (lines[i][0].substring(5,lines[i][0].length))
+                    + ". A contact your local government units for for their corresponding evacuation procedure"
+                    loc.push([to_input]);
+                    loc[i].push(lines[i][1].substring(7,lines[i][1].length));
+                    loc[i].push(lines[i][2].substring(7,lines[i][2].length));
+                }
+
+                
+            }
+
+
+
+            var barangays = $.ajax({
+            url: url_str.concat(kml_docs[0]),
+            dataType: "json",
+            success: console.log("Barangay data successfully loaded."),
+            error: function (xhr) {
+                alert(xhr.statusText)
+            }
+            })
+
+
+            function style(feature) {
+            return {
+                weight: 0,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7,
+                fillColor: feature.properties.fill
+                };
+            }
+
+            $.when(barangays).done(function() {
+                var map = L.map('map').setView([11.2142199211672, 125.009497200035], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
+                
+
+                for (var i = 0; i < loc.length; i++) {
+                    marker = new L.marker([loc[i][1],loc[i][2]])
+                    .bindPopup(loc[i][0])
+                    .addTo(map);
+                }
+        
+            });
+
+    </script>
+</body>
+</html>
