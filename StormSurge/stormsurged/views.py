@@ -4,5 +4,8 @@ from django.http import HttpResponse
 def home(request):
     return render(request,'home.html')
 
+def samar(request):
+    return render(request,'samar.html')
+    
 def about(request):
     return HttpResponse('<h1>Storm Surge About</h1>')

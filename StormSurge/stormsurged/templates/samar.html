@@ -58,8 +58,10 @@
                 </h1>
 
                 <p>Maximum elevation refers to the maximum elevation</p>
-                    <p><a href="" class="button button1" role="button">Tacloban</a></p>
-                    <p><a href="samar" class="button button2" role="button">Samar</a></button></p>
+                    <p><a href="{% url 'surge-home' %}" class="button button1" role="button">Tacloban</a></p>
+                    <p><a href="#" class="button button2" role="button">Samar</a></button></p>
+                    
+                
                 
             </div>
 
@@ -135,10 +137,8 @@
                 
             }
 
-
-
             var barangays = $.ajax({
-            url: url_str.concat(kml_docs[0]),
+            url: url_str.concat(kml_docs[1]),
             dataType: "json",
             success: console.log("Barangay data successfully loaded."),
             error: function (xhr) {
