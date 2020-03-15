@@ -10,3 +10,9 @@
   
   .button1 { background-color: #e31eb8; border-radius: 12px;}
   .button2 { background-color: #2feddd; border-radius: 12px;}
+
+
+  img {
+    max-width: 50%;
+    height: auto;
+  }
