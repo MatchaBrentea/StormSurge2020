@@ -1,5 +1,5 @@
 var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
-var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson","maxelev_Rammasun_1.geojson"];
+var kml_docs = ["maxelev_Haiyan_2.geojson","maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson","maxelev_Rammasun_1.geojson"];
 var i;
 var loc=[];
 var notif_arr=[];
@@ -50,7 +50,7 @@ function processData(allText) {
 }
 
 var barangays = $.ajax({
-url: url_str.concat(kml_docs[1]),
+url: url_str.concat(kml_docs[2]),
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {
