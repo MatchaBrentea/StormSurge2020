@@ -6,6 +6,9 @@ def home(request):
 
 def samar(request):
     return render(request,'samar.html')
+
+def bataan(request):
+    return render(request,'bataan.html')
     
 def about(request):
     return HttpResponse('<h1>Storm Surge About</h1>')

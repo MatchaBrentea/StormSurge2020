@@ -1,5 +1,5 @@
 var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
-var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson"];
+var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson","maxelev_Rammasun_1.geojson"];
 var i;
 var loc=[];
 var notif_arr=[];
