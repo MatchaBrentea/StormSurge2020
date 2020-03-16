@@ -40,7 +40,7 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
-                <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
                 <li><a href="https://github.com/MatchaBrentea/StormSurge2020" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
 
@@ -60,9 +60,7 @@
                 <p>Maximum elevation refers to the maximum elevation</p>
                     <p><a href="{% url 'surge-home' %}" class="button button1" role="button">Tacloban</a></p>
                     <p><a href="#" class="button button2" role="button">Samar</a></button></p>
-                    
-                
-                
+                    <p><img src="{% static 'img/gradient.jpg' %}" alt="Maximum Elevation"></p>
             </div>
 
             <div class="sidebar-pane" id="profile">
@@ -71,6 +69,7 @@
 
             <div class="sidebar-pane" id="messages">
                 <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p><button class="button button1" onclick="text()">Send SMS</button></p>
             </div>
 
             <div class="sidebar-pane" id="settings">
@@ -82,102 +81,9 @@
     <div id="map" class="sidebar-map"></div>
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+
     <script src="{% static 'js/leaflet-sidebar.js' %}"></script>
-
-    <script>
-
-    var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
-            var kml_docs = ["maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson"];
-            var i;
-            var loc=[];
-            var notif_arr=[];
-
-            var bar = $(document).ready(function() {
-                $.ajax({
-                    type: "GET",
-                    url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
-                    dataType: "text",
-                    success: function(data) {processData(data);}
-                });
-            });
-
-            function processData(allText) {
-                var allTextLines = allText.split(/\r\n|\n/);
-                var headers = allTextLines[0].split(',');
-                var lines=[];
-
-                for (var i=1; i<allTextLines.length; i++) {
-                    var data = allTextLines[i].split(',');
-                    if (data.length == headers.length) {
-
-                        var tarr = [];
-                        for (var j=0; j<headers.length; j++) {
-                            tarr.push(headers[j]+":"+data[j]);
-                        }
-                        lines.push(tarr);
-                    }
-                }
-                
-                for (var i=0; i<=lines.length;i++){
-                    var to_input = "<h1>STORM SURGE WARNING</h1>"
-                    + "<p style = 'color:red';''font-weight='bold'>"+(lines[i][0].substring(5,lines[i][0].length))
-                    + ", Tacloban City, 6500 Leyte, Philippines</p>"
-                    + "Expect a surge as early as "
-                    + ((parseFloat((lines[i][4].substring(4,lines[i][4].length))))/60).toString()
-                    + " hours from now which can reach max height of "
-                    + (lines[i][3].substring(6,lines[i][3].length))
-                    + " meter(s) at "
-                    + (lines[i][0].substring(5,lines[i][0].length))
-                    + ". A contact your local government units for for their corresponding evacuation procedure"
-                    loc.push([to_input]);
-                    loc[i].push(lines[i][1].substring(7,lines[i][1].length));
-                    loc[i].push(lines[i][2].substring(7,lines[i][2].length));
-                }
-
-                
-            }
-
-            var barangays = $.ajax({
-            url: url_str.concat(kml_docs[1]),
-            dataType: "json",
-            success: console.log("Barangay data successfully loaded."),
-            error: function (xhr) {
-                alert(xhr.statusText)
-            }
-            })
-
-
-            function style(feature) {
-            return {
-                weight: 0,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.7,
-                fillColor: feature.properties.fill
-                };
-            }
-
-            $.when(barangays).done(function() {
-                var map = L.map('map').setView([11.27794, 125.07323], 13);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                var sidebar = L.control.sidebar('sidebar').addTo(map);
-                
-                var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
-                
-
-                for (var i = 0; i < loc.length; i++) {
-                    marker = new L.marker([loc[i][1],loc[i][2]])
-                    .bindPopup(loc[i][0])
-                    .addTo(map);
-                }
-        
-            });
-
-    </script>
+    <script src = "{% static 'js/leaflet-samar.js' %}"></script>
+    <script src = "{% static 'js/promotexter.js' %}"></script>
 </body>
 </html>
