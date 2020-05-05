@@ -1,23 +1,21 @@
 var url_str = "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/"
-var kml_docs = ["maxelev_Haiyan_2.geojson","maxelev_Haiyan_1_4_Leyte.geojson","maxelev_Haiyan_1_4_Samar.geojson","maxelev_Rammasun_1.geojson"];
+var kml_docs = ["inundation_Haiyan.geojson"];
 var i;
 var loc=[];
 var notif_arr=[];
-var color = ['#a8323c','#32a852','#a8a032'];
-var t = 0;
 
 var bar = $(document).ready(function() {
     $.ajax({
         type: "GET",
         url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
         dataType: "text",
-        success: function(data) {processData(data);}
+        success: function(data) {}
     });
 });
 
 
 var barangays = $.ajax({
-url: url_str.concat(kml_docs[3]),
+url: url_str.concat(kml_docs[0]),
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {
@@ -37,25 +35,8 @@ return {
     };
 }
 
-function style1() {
-    $colr = color[t].toString();
-    return {
-        weight: 0,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: $colr
-        };
-    }
-
-function trythis(){
-    $str = color[t].toString();
-    alert($str);
-}
-
 $.when(barangays).done(function() {
-    var map = L.map('map').setView([14.50951, 120.62290], 13);
+    var map = L.map('map').setView([11.2142199211672, 125.009497200035], 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -64,22 +45,7 @@ $.when(barangays).done(function() {
     var sidebar = L.control.sidebar('sidebar').addTo(map);
     
     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
-   
-
-    setInterval(function(){
-        var kybarangays = L.geoJSON(barangays.responseJSON,{style:style1} ).addTo(map);
-        if(t >= 2){
-            t = 0;
-        }
-        else{
-            t += 1;
-        }   
-
-        setInterval(function(){
-        map.removeLayer(kybarangays);
-        },950);
-    },1000);
-
+    
 
 
 });

@@ -11,10 +11,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type ="text/css" href="{% static 'css/leaflet-sidebar.css' %}" />
     <link rel="stylesheet" type ="text/css" href="{% static 'css/new-template.css' %}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
 
@@ -62,7 +60,7 @@
                 <p>Maximum elevation refers to the maximum elevation</p>
                     <p><a href="{% url 'surge-tacloban' %}" class="button button1" role="button">Tacloban</a></p>
                     <p><a href="{% url 'surge-samar' %}" class="button button2" role="button">Samar</a></button></p>
-                    <p><a href="#" class="button button1" role="button">Bataan</a></button></p>
+                    <p><a href="{% url 'surge-bataan' %}" class="button button1" role="button">Bataan</a></button></p>
                     <p><img src="{% static 'img/gradient.jpg' %}" alt="Maximum Elevation"></p>
                 
             </div>
@@ -88,10 +86,8 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script src="{% static 'js/leaflet-sidebar.js' %}"></script>
-    <script src = "{% static 'js/leaflet-bataan.js' %}"></script>
+    <script src = "{% static 'js/leaflet-haiyan.js' %}"></script>
     <script src = "{% static 'js/promotexter.js' %}"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
     
 </body>
 </html>

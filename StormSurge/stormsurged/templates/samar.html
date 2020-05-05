@@ -38,14 +38,14 @@
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
             <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-                <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+                <li><a href="#home" role="tab"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-tint"></i></a></li>
                 <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
                 <li><a href="https://github.com/MatchaBrentea/StormSurge2020" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
 
             <ul role="tablist">
-                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+                <li><a href="{% url 'surge-home' %}" role="tab"><i class="fa fa-home"></i></a></li>
             </ul>
         </div>
 
@@ -58,14 +58,15 @@
                 </h1>
 
                 <p>Maximum elevation refers to the maximum elevation</p>
-                    <p><a href="{% url 'surge-home' %}" class="button button1" role="button">Tacloban</a></p>
+                    <p><a href="{% url 'surge-tacloban' %}" class="button button1" role="button">Tacloban</a></p>
                     <p><a href="#" class="button button2" role="button">Samar</a></button></p>
                     <p><a href="{% url 'surge-bataan' %}" class="button button1" role="button">Bataan</a></button></p>
                     <p><img src="{% static 'img/gradient.jpg' %}" alt="Maximum Elevation"></p>
             </div>
 
             <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <h1 class="sidebar-header">Inundation<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p><a href="{% url 'surge-haiyan' %}" class="button button1" role="button">Haiyan</a></p>
             </div>
 
             <div class="sidebar-pane" id="messages">

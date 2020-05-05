@@ -13,42 +13,6 @@ var bar = $(document).ready(function() {
     });
 });
 
-function processData(allText) {
-    var allTextLines = allText.split(/\r\n|\n/);
-    var headers = allTextLines[0].split(',');
-    var lines=[];
-
-    for (var i=1; i<allTextLines.length; i++) {
-        var data = allTextLines[i].split(',');
-        if (data.length == headers.length) {
-
-            var tarr = [];
-            for (var j=0; j<headers.length; j++) {
-                tarr.push(headers[j]+":"+data[j]);
-            }
-            lines.push(tarr);
-        }
-    }
-    
-    for (var i=0; i<=lines.length;i++){
-        var to_input = "<h1>STORM SURGE WARNING</h1>"
-        + "<p style = 'color:red';''font-weight='bold'>"+(lines[i][0].substring(5,lines[i][0].length))
-        + ", Tacloban City, 6500 Leyte, Philippines</p>"
-        + "Expect a surge as early as "
-        + ((parseFloat((lines[i][4].substring(4,lines[i][4].length))))/60).toString()
-        + " hours from now which can reach max height of "
-        + (lines[i][3].substring(6,lines[i][3].length))
-        + " meter(s) at "
-        + (lines[i][0].substring(5,lines[i][0].length))
-        + ". A contact your local government units for for their corresponding evacuation procedure"
-        loc.push([to_input]);
-        loc[i].push(lines[i][1].substring(7,lines[i][1].length));
-        loc[i].push(lines[i][2].substring(7,lines[i][2].length));
-    }
-
-    
-}
-
 var barangays = $.ajax({
 url: url_str.concat(kml_docs[2]),
 dataType: "json",
@@ -79,13 +43,6 @@ $.when(barangays).done(function() {
 
     var sidebar = L.control.sidebar('sidebar').addTo(map);
     
-    var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
-    
 
-    for (var i = 0; i < loc.length; i++) {
-        marker = new L.marker([loc[i][1],loc[i][2]])
-        .bindPopup(loc[i][0])
-        .addTo(map);
-    }
 
 });
