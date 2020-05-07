@@ -62,15 +62,17 @@
                     <p><a href="#" class="button button2" role="button">Samar</a></button></p>
                     <p><a href="{% url 'surge-bataan' %}" class="button button1" role="button">Bataan</a></button></p>
                     <p><img src="{% static 'img/gradient.jpg' %}" alt="Maximum Elevation"></p>
+                
             </div>
 
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Inundation<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-                <p><a href="{% url 'surge-haiyan' %}" class="button button1" role="button">Haiyan</a></p>
+                <p>Inundation Animation</p>
+                    <p><a href="haiyan" class="button button1" role="button">Haiyan</a></p>
             </div>
 
             <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <h1 class="sidebar-header">SMS<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <p><button class="button button1" onclick="text()">Send SMS</button></p>
             </div>
 
@@ -85,7 +87,8 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script src="{% static 'js/leaflet-sidebar.js' %}"></script>
-    <script src = "{% static 'js/leaflet-samar.js' %}"></script>
+    <script src = "{% static 'js/leaflet-samarr.js' %}"></script>
     <script src = "{% static 'js/promotexter.js' %}"></script>
+    
 </body>
 </html>

@@ -6,18 +6,9 @@ var notif_arr=[];
 var color = ['#a8323c','#32a852','#a8a032'];
 var t = 0;
 
-var bar = $(document).ready(function() {
-    $.ajax({
-        type: "GET",
-        url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
-        dataType: "text",
-        success: function(data) {processData(data);}
-    });
-});
-
 
 var barangays = $.ajax({
-url: url_str.concat(kml_docs[3]),
+url: url_str.concat(kml_docs[0]),
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {

@@ -4,15 +4,7 @@ var i;
 var loc=[];
 var notif_arr=[];
 
-var bar = $(document).ready(function() {
-    $.ajax({
-        type: "GET",
-        url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
-        dataType: "text",
-        success: function(data) {}
-    });
-});
-
+var anim_arr=[];
 
 var barangays = $.ajax({
 url: url_str.concat(kml_docs[0]),
@@ -22,6 +14,7 @@ error: function (xhr) {
     alert(xhr.statusText)
 }
 })
+
 
 
 function style(feature) {
@@ -41,11 +34,22 @@ $.when(barangays).done(function() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
+    
     var sidebar = L.control.sidebar('sidebar').addTo(map);
-    
+
+
     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
-    
+
+
+    Papa.parse("https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/timeseriesHaiyan_1_0_new.txt", {
+	download: true,
+	step: function(row) {
+		console.log("Row:", row.data);
+	},
+	complete: function() {
+		console.log("All done!");
+	}
+});
 
 
 });
