@@ -6,15 +6,6 @@ var notif_arr=[];
 var color = ['#a8323c','#32a852','#a8a032'];
 var t = 0;
 
-var bar = $(document).ready(function() {
-    $.ajax({
-        type: "GET",
-        url: "https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/tacloban_notif_coord.csv",
-        dataType: "text",
-        success: function(data) {processData(data);}
-    });
-});
-
 
 var barangays = $.ajax({
 url: url_str.concat(kml_docs[3]),
@@ -37,22 +28,6 @@ return {
     };
 }
 
-function style1() {
-    $colr = color[t].toString();
-    return {
-        weight: 0,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: $colr
-        };
-    }
-
-function trythis(){
-    $str = color[t].toString();
-    alert($str);
-}
 
 $.when(barangays).done(function() {
     var map = L.map('map').setView([14.50951, 120.62290], 13);
@@ -66,19 +41,19 @@ $.when(barangays).done(function() {
     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
    
 
-    setInterval(function(){
-        var kybarangays = L.geoJSON(barangays.responseJSON,{style:style1} ).addTo(map);
-        if(t >= 2){
-            t = 0;
-        }
-        else{
-            t += 1;
-        }   
+    // setInterval(function(){
+    //     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style1} ).addTo(map);
+    //     if(t >= 2){
+    //         t = 0;
+    //     }
+    //     else{
+    //         t += 1;
+    //     }   
 
-        setInterval(function(){
-        map.removeLayer(kybarangays);
-        },950);
-    },1000);
+    //     setInterval(function(){
+    //     map.removeLayer(kybarangays);
+    //     },950);
+    // },1000);
 
 
 

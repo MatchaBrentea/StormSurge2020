@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SCL 1920 - Storm Surge </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type ="text/css" href="{% static 'css/leaflet-sidebar.css' %}" />
+    <link rel="stylesheet" type ="text/css" href="{% static 'css/new-template.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <script src="{% static 'js/papaparse.min.js' %}"></script>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-globe"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-tint"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li><a href="https://github.com/MatchaBrentea/StormSurge2020" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="{% url 'surge-home' %}" role="tab"><i class="fa fa-home"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    Maximum Elevation
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p>Maximum elevation refers to the maximum elevation</p>
+                    <p><a href="{% url 'surge-tacloban' %}" class="button button1" role="button">Tacloban</a></p>
+                    <p><a href="{% url 'surge-samar' %}" class="button button2" role="button">Samar</a></button></p>
+                    <p><a href="{% url 'surge-bataan' %}" class="button button1" role="button">Bataan</a></button></p>
+                    <p><img src="{% static 'img/gradient.jpg' %}" alt="Maximum Elevation"></p>
+                
+            </div>
+
+            <div class="sidebar-pane" id="profile">
+                <h1 class="sidebar-header">Inundation<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p><a href="{% url 'surge-haiyan' %}" class="button button1" role="button">Haiyan</a></p>
+                <p><a href="{% url 'surge-rammasun' %}" class="button button2" role="button">Rammasun</a></p>
+                <button type="button" id="startBtn">Start Animation</button>
+                <button type="button" id="stopBtn" >Stop Animation</button>
+                <div id="AnimationTime"> </div>
+            </div>
+
+            <div class="sidebar-pane" id="messages">
+                <h1 class="sidebar-header">SMS<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p><button class="button button1" onclick="text()">Send SMS</button></p>
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" class="sidebar-map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+
+    <script src="{% static 'js/leaflet-sidebar.js' %}"></script>
+    <script src = "{% static 'js/leaflet-rammasun.js' %}"></script>
+    <script src = "{% static 'js/promotexter.js' %}"></script>
+    
+</body>
+</html>

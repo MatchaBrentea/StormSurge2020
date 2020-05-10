@@ -15,6 +15,9 @@ def haiyan(request):
 
 def tacloban(request):
     return render(request,'tacloban.html')
+
+def tacloban(request):
+    return render(request,'inundation_rammasun.html')
     
 def about(request):
     return HttpResponse('<h1>Storm Surge About</h1>')
