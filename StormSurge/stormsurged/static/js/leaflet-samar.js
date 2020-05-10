@@ -14,7 +14,7 @@ var bar = $(document).ready(function() {
 });
 
 var barangays = $.ajax({
-url: url_str.concat(kml_docs[2]),
+url: url_str.concat(kml_docs[0]),
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {

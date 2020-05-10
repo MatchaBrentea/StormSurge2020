@@ -45,6 +45,16 @@ $.when(barangays).done(function() {
     var sidebar = L.control.sidebar('sidebar').addTo(map);
     
     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
+
+    Papa.parse("https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/timeseriesHaiyan_1_0_new.txt", {
+    download: true,
+    step: function(row) {
+        console.log("Row:", row.data);
+    },
+    complete: function() {
+        console.log("All done!");
+    }
+});
     
 
 
