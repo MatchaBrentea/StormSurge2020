@@ -33,8 +33,6 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL=True
-
 
 # Application definition
 
@@ -52,6 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',     
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'StormSurge.urls'
@@ -129,3 +131,4 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+CORS_ORIGIN_ALLOW_ALL=True

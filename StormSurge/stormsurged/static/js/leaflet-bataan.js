@@ -8,7 +8,7 @@ var t = 0;
 
 
 var barangays = $.ajax({
-url: url_str.concat(kml_docs[0]),
+url: url_str.concat(kml_docs[3]),
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {
@@ -28,22 +28,6 @@ return {
     };
 }
 
-function style1() {
-    $colr = color[t].toString();
-    return {
-        weight: 0,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: $colr
-        };
-    }
-
-function trythis(){
-    $str = color[t].toString();
-    alert($str);
-}
 
 $.when(barangays).done(function() {
     var map = L.map('map').setView([14.50951, 120.62290], 13);
@@ -57,19 +41,19 @@ $.when(barangays).done(function() {
     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style} ).addTo(map);
    
 
-    setInterval(function(){
-        var kybarangays = L.geoJSON(barangays.responseJSON,{style:style1} ).addTo(map);
-        if(t >= 2){
-            t = 0;
-        }
-        else{
-            t += 1;
-        }   
+    // setInterval(function(){
+    //     var kybarangays = L.geoJSON(barangays.responseJSON,{style:style1} ).addTo(map);
+    //     if(t >= 2){
+    //         t = 0;
+    //     }
+    //     else{
+    //         t += 1;
+    //     }   
 
-        setInterval(function(){
-        map.removeLayer(kybarangays);
-        },950);
-    },1000);
+    //     setInterval(function(){
+    //     map.removeLayer(kybarangays);
+    //     },950);
+    // },1000);
 
 
 

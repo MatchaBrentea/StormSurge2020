@@ -68,7 +68,8 @@
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Inundation<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <p>Inundation Animation</p>
-                    <p><a href="haiyan" class="button button1" role="button">Haiyan</a></p>
+                    <p><a href="{% url 'surge-haiyan' %}" class="button button1" role="button">Haiyan</a></p>
+                    <p><a href="{% url 'surge-rammasun' %}" class="button button2" role="button">Rammasun</a></p>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -83,6 +84,8 @@
     </div>
 
     <div id="map" class="sidebar-map"></div>
+    
+
 
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 

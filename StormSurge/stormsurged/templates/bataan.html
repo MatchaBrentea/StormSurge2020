@@ -17,6 +17,7 @@
     
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
+    <script src="{% static 'js/papaparse.min.js' %}"></script>
 
     <style>
         body {
@@ -70,11 +71,13 @@
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Inundation<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <p><a href="{% url 'surge-haiyan' %}" class="button button1" role="button">Haiyan</a></p>
+                <p><a href="{% url 'surge-rammasun' %}" class="button button2" role="button">Rammasun</a></p>
             </div>
 
             <div class="sidebar-pane" id="messages">
                 <h1 class="sidebar-header">SMS<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <p><button class="button button1" onclick="text()">Send SMS</button></p>
+                <p><button class="button button2" id="download-btn">Download</button></p>
             </div>
 
             <div class="sidebar-pane" id="settings">
@@ -92,6 +95,5 @@
     <script src = "{% static 'js/promotexter.js' %}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
-    
 </body>
 </html>

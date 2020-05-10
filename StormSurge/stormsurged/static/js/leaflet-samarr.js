@@ -41,5 +41,4 @@ $.when(barangays).done(function() {
     
 
 
-
 }); 
