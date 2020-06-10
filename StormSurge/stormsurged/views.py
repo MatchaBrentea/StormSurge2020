@@ -16,7 +16,7 @@ def haiyan(request):
 def tacloban(request):
     return render(request,'tacloban.html')
 
-def tacloban(request):
+def rammasun(request):
     return render(request,'inundation_rammasun.html')
     
 def about(request):

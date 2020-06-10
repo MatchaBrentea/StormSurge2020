@@ -7,11 +7,7 @@ var notif_arr=[];
 
 
 var barangays = $.ajax({
-<<<<<<< HEAD:StormSurge/stormsurged/static/js/leaflet-samar.js
-url: url_str.concat(kml_docs[0]),
-=======
 url: url_str.concat(kml_docs[1]),
->>>>>>> 1cebf3932b9f68b7d873ab89839243a21e8e3095:StormSurge/stormsurged/static/js/leaflet-samarr.js
 dataType: "json",
 success: console.log("Barangay data successfully loaded."),
 error: function (xhr) {

@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^bataan/',views.bataan,name='surge-bataan'),
     url(r'^haiyan/',views.haiyan,name='surge-haiyan'),
     url(r'^tacloban/',views.tacloban,name='surge-tacloban'),
-    url(r'^rammasun/',views.tacloban,name='surge-rammasun')
+    url(r'^rammasun/',views.rammasun,name='surge-rammasun')
 ]
