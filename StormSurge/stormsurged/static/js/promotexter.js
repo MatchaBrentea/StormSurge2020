@@ -9,7 +9,7 @@ function text(){
     var apiKey = 'ddb86e90de561fbfbe516e1654093998';
     var apiSecret=  '493c73fae59a955b07ae33254188bec7';
     var from = 'SMSLSurge';
-    var to = ['09298146675'];
+    var to = ['09298146675', '09088860685'];
     var text = "STORM SURGE WARNING!%0a%0aStorm Surge Detected at Tacloban City!"
                 +"Detected at "+date+" on "+time+"%0a%0a"
                 +"%0aPlease be advised of the details of the storm surge generated at https://raw.githubusercontent.com/MatchaBrentea/stormsurgefiles/master/HaiyanTacloban.notifications"
